@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+	<title>PWI-exam</title>
+    <!--Polymer-->
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <link  rel="import" href="bower_components/PWI-save/PWI-save.html">
+    <link  rel="import" href="bower_components/IMG-exam/IMG-exam.html">
+    
+    <!--angular y firebase-->
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
+  <script type="text/javascript" src="bower_components/angularfire/dist/angularfire.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="controllers.js"></script>
+  <script type="text/javascript" src="factories.js"></script>
+    
+    <!--Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    
+  <!--google-youtube-->
+    <link rel="import" href="bower_components/google-youtube/demo/demo.elements.html">
+    <link  rel="import" href="bower_components/pwi-localdom/pwi-localdom.html">
+
+</head>
+
+
+<body ng-app="ChatUp">
+    
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid col-sm-8 col-sm-offset-2">
+    <div class="navbar-header">
+      <a class="navbar-brand " href="#">PWI-Examen</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="#"></a></li>
+      </ul>
+    </div>
+      </div>
+    </nav>
+    
+    <div class="row col-sm-8 col-sm-offset-2">
+        
+          <div class="col-sm-6">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Imagen</h3>
+            </div>
+            <div class="panel-body">
+                <span>Link: </span>
+                <input type="text" ng-model="sometext" /><!-- buscar otro forma* -->
+                <IMG-exam image="{{ sometext }}"></IMG-exam>
+                <PWI-save></PWI-save>
+            </div>
+          </div>
+        </div>
+        
+         <div class="col-sm-6">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Video</h3>
+            </div>
+            <div class="panel-body">
+                <demo-element></demo-element>
+              <PWI-save></PWI-save>
+            </div>
+          </div>
+        </div>
+        
+         <!-- chat -->
+        <div class="col-sm-12">
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">Chat</h3>
+            </div>
+            <div class="panel-body" ng-controller="ChatController">
+                    <div class="row">
+      <div class="col-sm-12">
+        <ul class="messagesList list-unstyle">
+          <li ng-repeat="message in messages">
+            <p><span>{{message.name}} <small>says</small>:</span> {{message.text}} <button ng-click="removeMessage(message)">X</button></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <hr>
+        <form ng-submit="sendMessage()">
+          <input type="text" ng-model="messageToSend.name">
+          <input type="text" ng-model="messageToSend.text" >
+          <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+            </div>
+          </div>
+        </div><!--fin chat -->
+  </div>
+
+    
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+     
+</body>
+<html>

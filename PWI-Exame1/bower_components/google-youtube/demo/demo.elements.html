@@ -1,0 +1,90 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../google-youtube.html">
+
+
+<dom-module id="demo-element">
+  <template id="page-template">
+    <style>
+      div {
+        margin-bottom: 1em;
+      }
+    </style>
+      
+   <div>
+      <span for="videoId">Video ID:</span>
+      <input id="videoId" value="47PKQEhIBeo">
+      <button id="cue-video" on-click="handleCueVideo">Cue</button>
+    </div>  
+
+    <google-youtube id="googleYouTube"
+                    playsupported="{{playSupported}}"
+                    video-id="47PKQEhIBeo"
+                    state="{{state}}"
+                    currenttime="{{currentTime}}"
+                    currenttimeformatted="{{currentTimeFormatted}}"
+                    duration="{{duration}}"
+                    durationformatted="{{durationFormatted}}"
+                    fractionloaded="{{fractionLoaded}}"
+                    on-google-youtube-state-change="handleStateChange"
+                    on-google-youtube-error="handleYouTubeError">
+    </google-youtube>
+      
+    <div>
+      <button id="play-video" class="btn-success"
+        disabled="{{computePlayDisabled(state, playSupported)}}"
+        on-click="handlePlayVideo"
+      >Play</button>
+      <button id="pause-video" class="btn-danger"
+        disabled="{{computePauseDisabled(state)}}"
+        on-click="handlePauseVideo"
+      >Pause</button>
+    </div>
+
+    <div>
+  
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'demo-element',
+    properties: {
+      playSupported: Boolean,
+      state: String,
+      currentTime: Number,
+      currentTimeFormatted: String,
+      duration: Number,
+      durationFormatted: String,
+      fractionLoaded: Number,
+      events: {
+        type: Array,
+        value: []
+      }
+    },
+    computeProgress: function(currentTime, duration) {
+      return currentTime / duration;
+    },
+    computePlayDisabled: function(state, playSupported) {
+      return state == 1 || state == 3 || !playSupported;
+    },
+    computePauseDisabled: function(state) {
+      return state != 1 && state != 3;
+    },
+    handleStateChange: function(ev) {
+      this.events.push({data: ev.detail.data});
+    },
+    handleYouTubeError: function(ev) {
+      console.error('YouTube playback error', ev.detail);
+    },
+    handlePlayVideo: function(ev) {
+      this.$.googleYouTube.play();
+    },
+    handlePauseVideo: function(ev) {
+      this.$.googleYouTube.pause();
+    },
+    handleCueVideo: function(ev) {
+      this.$.googleYouTube.videoid = this.$.videoId.value;
+    }
+  });
+
+</script>
+

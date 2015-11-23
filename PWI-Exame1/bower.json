@@ -1,0 +1,26 @@
+{
+  "name": "PWI-Examen1",
+  "version": "0.0.0",
+  "authors": [
+    "meluk <kmelisu@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "google-youtube": "GoogleWebComponents/google-youtube#~1.1.2",
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.8",
+    "angularfire": "~1.1.3"
+  }
+}
